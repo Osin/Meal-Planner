@@ -7,7 +7,6 @@ const enum Tag {
   other = 'Autre'
 }
 export interface Meal {
-  id: number;
   name: string;
   description: string;
   ingredients: string[];
