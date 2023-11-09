@@ -4,17 +4,21 @@ const preventDefault = (ev: Event) => {
   if (ev.preventDefault) {
     ev.preventDefault();
   }
-  ev.returnValue = false;
+  ev.defaultPrevented;
 };
 
 const enableBodyScroll = () => {
-  document && document.removeEventListener("wheel", preventDefault, false);
+  if (typeof document !== 'undefined') {
+    document && document.removeEventListener("wheel", preventDefault, false);
+  }
 };
 const disableBodyScroll = () => {
-  document &&
-  document.addEventListener("wheel", preventDefault, {
-    passive: false
-  });
+  if (typeof window !== 'undefined') {
+    document &&
+    document.addEventListener("wheel", preventDefault, {
+      passive: false
+    });
+  }
 };
 
 function usePreventBodyScroll() {

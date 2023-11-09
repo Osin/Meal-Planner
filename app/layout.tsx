@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import Header from '@/app/components/Header';
+import { Analytics } from '@vercel/analytics/react';
 import CssBaseline from '@mui/material/CssBaseline';
 import * as React from 'react';
 
@@ -22,6 +22,7 @@ export default function RootLayout({
       <body className={inter.className}>
       {children}
       <CssBaseline />
+      <Analytics />
       </body>
     </html>
   )

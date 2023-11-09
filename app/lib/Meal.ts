@@ -12,6 +12,6 @@ export interface Meal {
   description: string;
   ingredients: string[];
   image: string;
-  comments: Comment[];
+  comments: string[];
   tags: Tag[];
 }
