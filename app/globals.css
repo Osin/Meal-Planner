@@ -1,0 +1,43 @@
+.react-horizontal-scrolling-menu--scroll-container {
+    display: flex;
+    overflow-y: hidden;
+    position: relative;
+    width: 100%
+}
+
+.react-horizontal-scrolling-menu--scroll-container.rtl {
+    direction: rtl
+}
+
+.react-horizontal-scrolling-menu--inner-wrapper {
+    display: flex;
+    overflow-y: hidden;
+    height: 100%;
+    align-items: center;
+    background-color: #ddd;
+}
+
+.react-horizontal-scrolling-menu--wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.react-horizontal-scrolling-menu--footer, .react-horizontal-scrolling-menu--header {
+    width: 100%
+}
+
+.react-horizontal-scrolling-menu--arrow-left, .react-horizontal-scrolling-menu--arrow-right {
+    display: flex
+}
+
+/* Hide scroll bar */
+.react-horizontal-scrolling-menu--scroll-container::-webkit-scrollbar {
+    display: none;
+}
+
+.react-horizontal-scrolling-menu--scroll-container {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
