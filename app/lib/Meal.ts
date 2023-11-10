@@ -1,16 +1,14 @@
-const enum Tag {
-  entry = 'Entrée',
-  main = 'Repas',
-  dessert = 'Dessert',
-  drink = 'Boisson',
-  snack = 'Gouter',
-  other = 'Autre'
+export enum Tag {
+  entry = 'entry',
+  main = 'main',
+  dessert = 'dessert',
+  drink = 'drink',
+  snack = 'snack',
+  other = 'other'
 }
 export interface Meal {
   name: string;
   description: string;
-  ingredients: string[];
-  image: string;
-  comments: string[];
-  tags: Tag[];
+  image: {url: string, alt: string};
+  tags: string[];
 }

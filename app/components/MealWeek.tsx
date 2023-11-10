@@ -13,7 +13,7 @@ import {
 } from '@/app/lib/MealWeek';
 import {MealUpdate} from '@/app/lib/MealUpdate';
 import {Meal} from '@/app/lib/Meal';
-import {Dialog, useMediaQuery} from '@mui/material';
+import {useMediaQuery} from '@mui/material';
 import {useTheme} from '@mui/system';
 import NewMealDialog from '@/app/components/NewMealDialog';
 
@@ -21,14 +21,14 @@ type scrollVisibilityApiType = React.ContextType<typeof VisibilityContext>;
 
 interface MealWeekProps {
   mealWeek: MealWeakInterface;
-  handleMealClick: (update: MealUpdate) => void;
+  onUpdateMealWeek: (newMealWeek: MealWeakInterface) => void;
 }
 
 const LAST_INDEX_DAY_OF_WEEK = 6;
 
-function MealWeek({mealWeek, handleMealClick}: MealWeekProps) {
+const MealWeek = ({mealWeek, onUpdateMealWeek}: MealWeekProps) => {
   const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('xs'));
+  const fullScreen = useMediaQuery(theme.breakpoints.only('xs'));
   const {disableScroll, enableScroll} = usePreventBodyScroll();
   const [mealPlaceInUpdate, setMealPlaceInUpdate] = React.useState<MealUpdate | undefined>();
   const featuredDay = getDay(new Date());
@@ -36,38 +36,36 @@ function MealWeek({mealWeek, handleMealClick}: MealWeekProps) {
       day: keyof MealWeakInterface,
       moment: keyof MealDayInterface,
       meal?: Meal | undefined) => {
-    console.log('handleMealClickWrapper', {day, moment, meal});
     setMealPlaceInUpdate({day, moment, meal: meal});
   };
 
-  const onMealDialogClose = () => {
-    setMealPlaceInUpdate(undefined);
-  };
-
-  const onMealDialogSave = (mealPlaceUpdated: MealUpdate) => {
+  const onMealDialogSave = (mealUpdated: Meal | undefined) => {
+    if (mealPlaceInUpdate === undefined) {
+      return;
+    }
     //clone the week first
     const newMealWeek = {...mealWeek};
-    //add the new meal if not exist
-    if (mealPlaceInUpdate?.meal === undefined && mealPlaceUpdated.meal) {
-      newMealWeek[mealPlaceUpdated.day][mealPlaceUpdated.moment].push(
-          mealPlaceUpdated.meal);
-    }
-
-    //replace the old meal by the new if exist
-    if(mealPlaceInUpdate?.meal !== undefined){
+    //remove the old meal if exist
+    if (mealPlaceInUpdate.meal !== undefined) {
       //erase the old first
-      newMealWeek[mealPlaceUpdated.day][mealPlaceUpdated.moment] = mealWeek[mealPlaceUpdated.day][mealPlaceUpdated.moment].filter(
-          mealFromMealWeek => mealFromMealWeek.name !== mealPlaceInUpdate.meal?.name);
+      newMealWeek[mealPlaceInUpdate.day][mealPlaceInUpdate.moment] =
+          mealWeek[mealPlaceInUpdate.day][mealPlaceInUpdate.moment].filter(
+              mealFromMealWeek => mealFromMealWeek.name !==
+                  mealPlaceInUpdate.meal?.name);
     }
-    const meal = mealPlaceUpdated.meal;
-    if (mealPlaceInUpdate?.meal !== undefined) {
-      newMealWeek[mealPlaceUpdated.day][mealPlaceUpdated.moment].filter(
-          mealFromMealWeek => mealFromMealWeek.name !== meal.name);
+    //add the new meal or the replaced meal
+    if (mealUpdated !== undefined) {
+      newMealWeek[mealPlaceInUpdate.day][mealPlaceInUpdate.moment].push(
+          mealUpdated);
     }
-
+    //as we have removed the old meal first, we are treated the deleted case
+    //we send the week meal to the parent
+    onUpdateMealWeek(newMealWeek);
+    setMealPlaceInUpdate(undefined);
   };
-
   return (
+      <>
+
       <Box
           component={'main'}
           sx={{
@@ -110,17 +108,19 @@ function MealWeek({mealWeek, handleMealClick}: MealWeekProps) {
               />
           ))}
         </ScrollMenu>
-        {<NewMealDialog
+      </Box>
+        {
+          <NewMealDialog
             fullScreen={fullScreen}
             open={mealPlaceInUpdate !== undefined}
-            handleDelete={() => {}}
-            handleSave={(mealPlaceUpdated: MealUpdate) => {
-              onMealDialogSave(mealPlaceInUpdate, mealPlaceUpdated);
+            handleClose={() => setMealPlaceInUpdate(undefined)}
+            handleChange={(mealUpdated: Meal | undefined) => {
+              onMealDialogSave(mealUpdated);
             }}
         />}
-      </Box>
+      </>
   );
-}
+};
 
 function onWheel(apiObj: scrollVisibilityApiType, ev: React.WheelEvent): void {
   const isThouchpad = Math.abs(ev.deltaX) !== 0 || Math.abs(ev.deltaY) < 15;

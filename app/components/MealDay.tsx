@@ -46,7 +46,6 @@ const mealDay = ({
     <CardMedia sx={sxCardMedia}>
       {Object.keys(mealDay).map((moment, index) =>
           <MealMoment key={index}
-                      day={day}
                       moment={moment}
                       onMealClick={handleMealClick}
                       meals={mealDay[moment as keyof MealDayInterface]}

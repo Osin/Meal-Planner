@@ -9,7 +9,6 @@ import {MealWeek} from '@/app/lib/MealWeek';
 
 export interface MealMomentProps {
   moment: string;
-  day: string;
   meals: MealInterface[];
   onMealClick: (moment: keyof MealDay, meal?: MealInterface) => void;
 }
@@ -33,7 +32,7 @@ const renderMeal = (
       width: `calc(100% / ${maxMealByDay})`,
       height: 'calc(100% - 16px)',
     }}/>);
-const mealMoment = ({day, moment, meals, onMealClick}: MealMomentProps) => {
+const mealMoment = ({moment, meals, onMealClick}: MealMomentProps) => {
   return (
       <Box key={moment} height={'calc(100% / 3)'} width={'100%'}>
         <Typography variant={'h5'} component={'h3'}>{moment}</Typography>
