@@ -131,10 +131,14 @@ const NewMealDialog = ({
           }
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={() => {handleChange(undefined);}}>
+          <Button variant={"text"} autoFocus onClick={() => {handleChange(undefined);}}>
             Delete
           </Button>
-          <Button onClick={() => {
+          <Stack>
+          <Button variant={"outlined"} color={'secondary'} autoFocus onClick={() => {handleChange(undefined);}}>
+            Cancel
+          </Button>
+          <Button variant="contained" onClick={() => {
             if (
                 typeof newMeal?.name !== 'undefined'
                 && typeof newMeal?.image !== 'undefined'
@@ -144,6 +148,7 @@ const NewMealDialog = ({
           }}>
             Save
           </Button>
+          </Stack>
         </DialogActions>
       </Dialog>);
 };
