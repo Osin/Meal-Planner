@@ -22,24 +22,18 @@ const emptyMeal = (<Box border={'1px dashed black'} sx={{
 }}>
   <AddCircleOutlineOutlined height={'1rem'}/></Box>);
 
-const filledMeal = (<Image
-    src={'https://source.unsplash.com/random/400x400/?food,sig=' +
-        (Math.floor(Math.random() * 10))
-    }
-    alt="food"
+const filledMeal = (meal: Meal) => (<Image
+    src={meal.image.url}
+    alt={meal.image.alt}
     style={{objectFit: 'cover'}}
     fill
-    placeholder={'blur'}
-    blurDataURL={'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mMsLEyrBwAEbAHJ/47QhgAAAABJRU5ErkJggg=='}
+    sizes={'100%'}
 />);
 
 const meal = ({
-  sx, meal, onMealClick = (meal) => {
-    console.log('click on', meal);
-  },
+  sx, meal, onMealClick,
 }: MealProps) => {
   const handleMealClick = (meal: Meal | undefined) => {
-    console.log('handleMealClick', meal);
     onMealClick(meal);
   };
 
@@ -49,7 +43,7 @@ const meal = ({
             onClick={() => handleMealClick(meal)}
             sx={{height: '100%', width: '100%', p: 0}}
         >
-          {meal ? (filledMeal) : (emptyMeal)}
+          {meal ? (filledMeal(meal)) : (emptyMeal)}
         </IconButton>
       </CardMedia>
   );

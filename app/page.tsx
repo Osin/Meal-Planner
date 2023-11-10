@@ -12,7 +12,6 @@ export default function Home() {
       createMealWeekFromLocalStorage
   );
   const handleUpdateMealWeek = (newMealWeek: MealWeekInterface) => {
-    console.log('handleUpdateMealWeek', newMealWeek);
     updateMealWeek({...newMealWeek});
   }
   return (<MealWeek mealWeek={mealWeek} onUpdateMealWeek={handleUpdateMealWeek}/>

@@ -10,7 +10,6 @@ const getStorageValue = (
     key: string, defaultValue: any, factory?: Function) => {
   // getting stored value
   if (typeof window !== 'undefined') {
-    console.log('retrieveLocalStorage', key);
     const saved = localStorage.getItem(key);
     if (saved) {
       const savedObj = JSON.parse(saved);
@@ -27,7 +26,6 @@ export const useLocalStorage = (
   });
   useEffect(() => {
     // storing input name
-    console.log('storeLocalStorage', key, value);
     localStorage.setItem(key, JSON.stringify(value));
   }, [key, value]);
 

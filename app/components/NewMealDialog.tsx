@@ -1,11 +1,11 @@
-import React from 'react';
+import {useEffect, useState} from 'react';
 import {
   Button, Chip,
   Dialog, DialogActions,
   DialogContent,
   DialogTitle, Stack, TextField, useMediaQuery,
 } from '@mui/material';
-import {Meal, Tag} from '@/app/lib/Meal';
+import {Meal} from '@/app/lib/Meal';
 import ImageSearchClient from '@/app/components/ImageSearchClient';
 import Image from 'next/image';
 import IconButton from '@mui/material/IconButton';
@@ -17,34 +17,38 @@ import Box from '@mui/material/Box';
 import {useTheme} from '@mui/system';
 
 interface NewMealDialogProps {
-  fullScreen: boolean;
   meal?: Meal;
   handleClose: any;
   handleChange: (meal?: Meal) => void;
   open: boolean;
 }
 
-const newMealDialog = ({
+const NewMealDialog = ({
   meal,
   handleClose,
   open,
-  fullScreen,
   handleChange,
-}: NewMealDialogProps): React.ReactElement => {
-  const [newMeal, setNewMeal] = React.useState<Partial<Meal> | undefined>(meal);
+}: NewMealDialogProps) => {
+  const [newMeal, setNewMeal] = useState<Partial<Meal> | undefined>({...meal});
+  useEffect(() => {
+    setNewMeal({...meal});
+  }, [meal]);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.only('xs'));
-  console.log('newMealDialog', newMeal);
   const handleImageChoose = (image: { url: string, alt: string }) => {
     if (newMeal) {
-      setNewMeal({...newMeal, image: image, name: newMeal.name ?? image.alt});
+      setNewMeal({
+        ...newMeal,
+        image: image,
+        name: newMeal.name ?? image.alt,
+        description: newMeal.description ?? '',
+      });
     } else {
-      setNewMeal({image: image, name: image.alt});
+      setNewMeal({image: image, name: image.alt, description: ''});
     }
   };
   return (
       <Dialog
-          fullScreen={fullScreen}
           open={open}
           maxWidth={'sm'}
           fullWidth={true}
@@ -52,7 +56,7 @@ const newMealDialog = ({
           aria-labelledby="responsive-dialog-title"
       >
         <DialogTitle id="responsive-dialog-title">
-          {meal ? 'Update this meal?' : 'Add a new meal'}
+          {newMeal ? 'Update this meal?' : 'Add a new meal'}
         </DialogTitle>
         <DialogContent>
           {newMeal?.image ?
@@ -82,6 +86,8 @@ const newMealDialog = ({
                         sx={{color: 'action.active', mr: 1, my: 0.5}}/>
                     <TextField
                         label="Meal name"
+                        autoFocus
+                        error={newMeal.name === undefined}
                         variant="standard" fullWidth
                         placeholder="What is it?"
                         defaultValue={newMeal.name}
@@ -113,34 +119,10 @@ const newMealDialog = ({
                         onChange={(event) => {
                           setNewMeal({
                             ...newMeal,
-                            description: event.target.value == ''
-                                ? undefined
-                                : event.target.value,
+                            description: event.target.value,
                           });
                         }}/>
                   </Box>
-
-                  <Stack direction="row" spacing={1}>
-                    {
-                      Object.keys(Tag).map((tag, index) => (
-                          <Chip key={index} label={tag}
-                                color={newMeal.tags?.includes(tag)
-                                    ? 'primary'
-                                    : 'default'} onClick={() => {
-                            if (newMeal.tags && newMeal.tags.includes(tag)) {
-                              setNewMeal({
-                                ...newMeal,
-                                tags: newMeal.tags.filter(t => t !== tag),
-                              });
-                            } else {
-                              setNewMeal({
-                                ...newMeal,
-                                tags: [...newMeal.tags ?? [], tag],
-                              });
-                            }
-                          }}/>
-                      ))}
-                  </Stack>
                 </Stack>
               </Stack>
               :
@@ -152,10 +134,17 @@ const newMealDialog = ({
           <Button autoFocus onClick={() => {handleChange(undefined);}}>
             Delete
           </Button>
-          <Button onClick={() => handleChange(meal)} autoFocus>
+          <Button onClick={() => {
+            if (
+                typeof newMeal?.name !== 'undefined'
+                && typeof newMeal?.image !== 'undefined'
+                && typeof newMeal?.description !== 'undefined') {
+              handleChange(newMeal as Meal);
+            }
+          }}>
             Save
           </Button>
         </DialogActions>
       </Dialog>);
 };
-export default newMealDialog;
+export default NewMealDialog;

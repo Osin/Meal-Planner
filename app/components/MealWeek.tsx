@@ -9,7 +9,6 @@ import {getDay} from '@/app/lib/getDay';
 import Header from '@/app/components/Header';
 import {
   MealWeek as MealWeakInterface,
-  getDefaultMealWeek,
 } from '@/app/lib/MealWeek';
 import {MealUpdate} from '@/app/lib/MealUpdate';
 import {Meal} from '@/app/lib/Meal';
@@ -27,8 +26,6 @@ interface MealWeekProps {
 const LAST_INDEX_DAY_OF_WEEK = 6;
 
 const MealWeek = ({mealWeek, onUpdateMealWeek}: MealWeekProps) => {
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.only('xs'));
   const {disableScroll, enableScroll} = usePreventBodyScroll();
   const [mealPlaceInUpdate, setMealPlaceInUpdate] = React.useState<MealUpdate | undefined>();
   const featuredDay = getDay(new Date());
@@ -111,8 +108,8 @@ const MealWeek = ({mealWeek, onUpdateMealWeek}: MealWeekProps) => {
       </Box>
         {
           <NewMealDialog
-            fullScreen={fullScreen}
             open={mealPlaceInUpdate !== undefined}
+            meal={mealPlaceInUpdate?.meal}
             handleClose={() => setMealPlaceInUpdate(undefined)}
             handleChange={(mealUpdated: Meal | undefined) => {
               onMealDialogSave(mealUpdated);
