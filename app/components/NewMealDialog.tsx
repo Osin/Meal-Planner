@@ -130,24 +130,26 @@ const NewMealDialog = ({
                   onImageSelected={handleImageChoose}/>
           }
         </DialogContent>
-        <DialogActions>
-          <Button variant={"text"} autoFocus onClick={() => {handleChange(undefined);}}>
+        <DialogActions sx={{justifyContent: 'space-between'}}>
+          <Button variant={'text'} color={'warning'} autoFocus
+                  onClick={() => {handleChange(undefined);}}>
             Delete
           </Button>
-          <Stack>
-          <Button variant={"outlined"} color={'secondary'} autoFocus onClick={() => {handleChange(undefined);}}>
-            Cancel
-          </Button>
-          <Button variant="contained" onClick={() => {
-            if (
-                typeof newMeal?.name !== 'undefined'
-                && typeof newMeal?.image !== 'undefined'
-                && typeof newMeal?.description !== 'undefined') {
-              handleChange(newMeal as Meal);
-            }
-          }}>
-            Save
-          </Button>
+          <Stack direction={'row'} spacing={2}>
+            <Button variant={'outlined'} color={'secondary'} autoFocus
+                    onClick={handleClose}>
+              Cancel
+            </Button>
+            <Button variant="contained" onClick={() => {
+              if (
+                  typeof newMeal?.name !== 'undefined'
+                  && typeof newMeal?.image !== 'undefined'
+                  && typeof newMeal?.description !== 'undefined') {
+                handleChange(newMeal as Meal);
+              }
+            }}>
+              Save
+            </Button>
           </Stack>
         </DialogActions>
       </Dialog>);
