@@ -13,13 +13,18 @@ export interface MealMomentProps {
   onMealClick: (moment: keyof MealDay, meal?: MealInterface) => void;
 }
 
-const maxMealByDay: number = 3;
+const maxMealByDay: number = 8;
+
+interface RenderMealProps {
+  moment: string;
+  index: number;
+  totalRowsCount?: number;
+  onMealClick: (moment: keyof MealDay, meal?: MealInterface) => void;
+  meal?: MealInterface;
+}
 
 const renderMeal = (
-    moment: string,
-    index: number,
-    onMealClick: (moment: keyof MealDay, meal?: MealInterface) => void,
-    meal?: MealInterface) => (<Meal
+    {moment, index, onMealClick, meal, totalRowsCount=3}: RenderMealProps) => (<Meal
     meal={meal}
     key={index}
     onMealClick={
@@ -29,7 +34,7 @@ const renderMeal = (
     }
     sx={{
       position: 'relative',
-      width: `calc(100% / ${maxMealByDay})`,
+      width: `calc(100% / ${totalRowsCount})`,
       height: 'calc(100% - 16px)',
     }}/>);
 const mealMoment = ({moment, meals, onMealClick}: MealMomentProps) => {
@@ -42,11 +47,10 @@ const mealMoment = ({moment, meals, onMealClick}: MealMomentProps) => {
           height: 'calc(100% - 32px - 1.5rem)',
         }}>
           {meals.map(
-              (meal: MealInterface, index: number) => (renderMeal(moment, index,
-                  onMealClick, meal)),
+              (meal: MealInterface, index: number) => (renderMeal({moment : moment, index : index, onMealClick : onMealClick, meal : meal})),
           )}
           {meals.length < maxMealByDay &&
-              renderMeal(moment, meals.length, onMealClick)}
+              renderMeal({moment : moment, index : meals.length, onMealClick : onMealClick})}
         </Stack>
       </Box>
   );
