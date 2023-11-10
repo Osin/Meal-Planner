@@ -5,7 +5,6 @@ import Box from '@mui/material/Box';
 import {
   ImageList,
   ImageListItem,
-  Stack,
   TextField,
   useMediaQuery,
 } from '@mui/material';
@@ -32,7 +31,7 @@ const ImageSearchClient = ({onImageSelected}: ImageSearchClientProps) => {
       const response = await axios.get('https://api.unsplash.com/search/photos',
           {
             params: {
-              query: `food drink ${query}`,
+              query: `${query}`,
               per_page: imagePerPage,
               orientation: 'squarish',
             },
