@@ -13,6 +13,7 @@ import {
 import {MealUpdate} from '@/app/lib/MealUpdate';
 import {Meal} from '@/app/lib/Meal';
 import NewMealDialog from '@/app/components/NewMealDialog';
+import Footer from '@/app/components/Footer';
 
 type scrollVisibilityApiType = React.ContextType<typeof VisibilityContext>;
 
