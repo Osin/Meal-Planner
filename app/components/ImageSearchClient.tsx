@@ -32,7 +32,7 @@ const ImageSearchClient = ({onImageSelected}: ImageSearchClientProps) => {
       const response = await axios.get('https://api.unsplash.com/search/photos',
           {
             params: {
-              query: query,
+              query: `food drink ${query}`,
               per_page: imagePerPage,
               orientation: 'squarish',
             },
