@@ -40,11 +40,11 @@ const NewMealDialog = ({
       setNewMeal({
         ...newMeal,
         image: image,
-        name: newMeal.name ?? image.alt,
-        description: newMeal.description ?? '',
+        name: newMeal.name ?? undefined,
+        description: newMeal.description ?? image.alt,
       });
     } else {
-      setNewMeal({image: image, name: image.alt, description: ''});
+      setNewMeal({image: image, name: undefined, description: image.alt});
     }
   };
   return (
