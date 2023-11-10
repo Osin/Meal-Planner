@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {
-  Button, Chip,
+  Button,
   Dialog, DialogActions,
   DialogContent,
   DialogTitle, Stack, TextField, useMediaQuery,
