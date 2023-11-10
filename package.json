@@ -18,6 +18,7 @@
     "@vercel/analytics": "^1.1.1",
     "axios": "^1.6.1",
     "next": "14.0.1",
+    "next-pwa": "^5.6.0",
     "react": "^18",
     "react-dom": "^18",
     "react-horizontal-scrolling-menu": "^4.1.1",
