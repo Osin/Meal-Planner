@@ -12,8 +12,6 @@ import {
 } from '@/app/lib/MealWeek';
 import {MealUpdate} from '@/app/lib/MealUpdate';
 import {Meal} from '@/app/lib/Meal';
-import {useMediaQuery} from '@mui/material';
-import {useTheme} from '@mui/system';
 import NewMealDialog from '@/app/components/NewMealDialog';
 
 type scrollVisibilityApiType = React.ContextType<typeof VisibilityContext>;
@@ -74,7 +72,7 @@ const MealWeek = ({mealWeek, onUpdateMealWeek}: MealWeekProps) => {
         <ScrollMenu
             onWheel={onWheel}
             Header={<Header/>}
-            Footer={<div>Footer</div>}
+            Footer={<Footer/>}
         >
           {Object.keys(mealWeek).map((day, index) => (
               <MealDay

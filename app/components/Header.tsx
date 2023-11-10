@@ -6,10 +6,7 @@ import {FoodBankOutlined} from '@mui/icons-material';
 
 export default function Header() {
   return (
-      <AppBar position="sticky" color="primary" sx={{
-        // top: {xs: 'auto', sm: 0},
-        // bottom: {xs: '0', sm: 'auto'},
-      }}>
+      <AppBar position="sticky" color="primary">
         <Toolbar sx={{alignSelf: {xs: 'center', md: 'inherit'}}}>
           <FoodBankOutlined sx={{display: {xs: 'flex', md: 'flex'}, mr: 1}}/>
           <Typography
