@@ -1,3 +1,4 @@
+'use client';
 import {theme} from '@/app/lib/theme';
 import {NextAppDirEmotionCacheProvider} from 'tss-react/next';
 import {Box, ThemeProvider} from '@mui/material';
@@ -105,7 +106,8 @@ const privacyAndConfidentiality = () => {
             <Typography variant={'h2'}>L. Mise à jour des informations</Typography><p></p>
             Merci de nous faire savoir si les informations personnelles que nous détenons à votre sujet doivent être corrigées ou mises à jour.<p></p>
             <Typography variant={'h2'}>M. Cookies</Typography><p></p>
-            Notre site web utilise des cookies. Un cookie est un fichier contenant un identifiant (une chaîne de lettres et de chiffres) envoyé par un serveur web vers un navigateur web et stocké par le navigateur. L’identifiant est alors renvoyé au serveur à chaque fois que le navigateur demande une page au serveur. Les cookies peuvent être « persistants » ou « de session » : un cookie persistant est stocké par le navigateur et reste valide jusqu’à sa date d’expiration, à moins d’être supprimé par l’utilisateur avant cette date d’expiration ; quant à un cookie de session, il expire à la fin de la session utilisateur, lors de la fermeture du navigateur. Les cookies ne contiennent en général aucune information permettant d’identifier personnellement un utilisateur, mais les informations personnelles que nous stockons à votre sujet peuvent être liées aux informations stockées dans les cookies et obtenues par les cookies. {SÉLECTIONNEZ LA FORMULE ADAPTÉE Nous n’utilisons que des cookies de session / que des cookies persistants / des cookies de session et des cookies persistants sur notre site web.}<p></p>
+            Notre site web utilise des cookies. Un cookie est un fichier contenant un identifiant (une chaîne de lettres et de chiffres) envoyé par un serveur web vers un navigateur web et stocké par le navigateur. L’identifiant est alors renvoyé au serveur à chaque fois que le navigateur demande une page au serveur. Les cookies peuvent être « persistants » ou « de session » : un cookie persistant est stocké par le navigateur et reste valide jusqu’à sa date d’expiration, à moins d’être supprimé par l’utilisateur avant cette date d’expiration ; quant à un cookie de session, il expire à la fin de la session utilisateur, lors de la fermeture du navigateur. Les cookies ne contiennent en général aucune information permettant d’identifier personnellement un utilisateur, mais les informations personnelles que nous stockons à votre sujet peuvent être liées aux informations stockées dans les cookies et obtenues par les cookies.
+            Nous n’utilisons des cookies de session et des cookies persistants sur notre site web.<p></p>
             <ol>
               <li>Les noms des cookies que nous utilisons sur notre site web et les objectifs dans lesquels nous les utilisons sont décrits ci-dessous:
                 <ol type="a">
@@ -132,7 +134,6 @@ const privacyAndConfidentiality = () => {
               </li>
               <li>Supprimer les cookies aura un impact négatif sur l’utilisation de nombreux sites web.</li>
             </ol>
-            <em>Website Planet décline toute responsabilité et vous conseille de consulter des experts juridiques si vous implémentez le modèle ci-dessus sur votre site web. </em><p></p>
           </Box>
         </ThemeProvider>
       </NextAppDirEmotionCacheProvider>
