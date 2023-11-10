@@ -4,6 +4,7 @@ import './globals.css'
 import { Analytics } from '@vercel/analytics/react';
 import CssBaseline from '@mui/material/CssBaseline';
 import * as React from 'react';
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
     title: 'Meal Planner',
     description: 'Plan your meal for the week',
     siteName: 'Meal Planner',
-  }
+  },
 }
 
 export default function RootLayout({
@@ -34,6 +35,7 @@ export default function RootLayout({
       <CssBaseline />
       <Analytics />
       </body>
+    <Script crossOrigin={'anonymous'} strategy={'lazyOnload'} src={"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6227540516996137"} ></Script>
     </html>
   )
 }
