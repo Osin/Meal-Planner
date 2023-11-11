@@ -33,7 +33,6 @@ const ImageSearchClient = ({onImageSelected}: ImageSearchClientProps) => {
             params: {
               query: `${query}`,
               per_page: imagePerPage,
-              orientation: 'squarish',
             },
             headers: {
               Authorization: `Client-ID ${unsplashApiKey}`,
