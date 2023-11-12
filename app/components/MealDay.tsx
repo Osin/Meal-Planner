@@ -39,7 +39,7 @@ const mealDay = ({
   }
   return (<Card sx={sxCard}>
     <CardHeader
-        titleTypographyProps={{variant: 'h5', component: 'h2'}}
+        titleTypographyProps={{variant: 'h3'}}
         title={day[0].toUpperCase() + day.slice(1)}
         avatar={featured ? <TodayIcon color={'primary'}/> :
             <CalendarTodayIcon color={'disabled'}/>}/>

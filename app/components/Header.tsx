@@ -10,9 +10,8 @@ export default function Header() {
         <Toolbar sx={{alignSelf: {xs: 'center', md: 'inherit'}}}>
           <FoodBankOutlined sx={{display: {xs: 'flex', md: 'flex'}, mr: 1}}/>
           <Typography
-              variant="h5"
+              variant="h1"
               noWrap
-              component="h1"
               sx={{
                 mr: 2,
                 display: {xs: 'flex', md: 'flex'},

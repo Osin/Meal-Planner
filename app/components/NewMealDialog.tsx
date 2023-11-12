@@ -35,16 +35,16 @@ const NewMealDialog = ({
   }, [meal]);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.only('xs'));
-  const handleImageChoose = (image: { url: string, alt: string }) => {
+  const handleImageChoose = (image: { url: string, alt: string }, query: string) => {
     if (newMeal) {
       setNewMeal({
         ...newMeal,
         image: image,
-        name: newMeal.name ?? undefined,
-        description: newMeal.description ?? image.alt,
+        name: query,
+        description: image.alt,
       });
     } else {
-      setNewMeal({image: image, name: undefined, description: image.alt});
+      setNewMeal({image: image, name: query, description: image.alt});
     }
   };
   return (
@@ -55,8 +55,8 @@ const NewMealDialog = ({
           onClose={handleClose}
           aria-labelledby="responsive-dialog-title"
       >
-        <DialogTitle id="responsive-dialog-title">
-          {newMeal ? 'Update this meal?' : 'Add a new meal'}
+        <DialogTitle id="responsive-dialog-title" variant={'h4'}>
+          {newMeal?.name ? `Pick ${newMeal.name} meal` : 'Add a new meal'}
         </DialogTitle>
         <DialogContent>
           {newMeal?.image ?

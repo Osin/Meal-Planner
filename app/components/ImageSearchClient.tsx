@@ -15,7 +15,7 @@ import IconButton from '@mui/material/IconButton';
 const unsplashApiKey = process.env.NEXT_PUBLIC_UNSPLASH_API_KEY;
 
 interface ImageSearchClientProps {
-  onImageSelected: (image: {url: string, alt: string}) => void;
+  onImageSelected: (image: {url: string, alt: string}, query: string) => void;
 }
 
 const ImageSearchClient = ({onImageSelected}: ImageSearchClientProps) => {
@@ -58,7 +58,7 @@ const ImageSearchClient = ({onImageSelected}: ImageSearchClientProps) => {
   return (
       <Box>
         <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
-          <ImageSearchOutlined sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+          <ImageSearchOutlined sx={{color: 'action.active', mr: 1, my: 0.5, fontSize: '2rem'}}/>
           <TextField
               fullWidth
               onChange={(e) => setQuery(e.target.value)}
@@ -78,7 +78,7 @@ const ImageSearchClient = ({onImageSelected}: ImageSearchClientProps) => {
                 <IconButton
                     sx={{height, width}}
                     onClick={() => {
-                      onImageSelected({url: image.urls.small, alt: image.alt_description});
+                      onImageSelected({url: image.urls.small, alt: image.alt_description}, query);
                     }}>
                   <Image
                       height={height}
